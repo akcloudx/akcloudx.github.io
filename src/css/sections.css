@@ -514,6 +514,21 @@
   margin-bottom: 1.1rem;
 }
 
+/* vendor mark — monochrome so it sits quietly next to the label */
+.cert-group__logo {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  color: var(--text);
+  opacity: .9;
+}
+
+/* the Microsoft four-square reads heavier than the AWS glyph at the same box */
+.cert-group__logo--ms {
+  width: 18px;
+  height: 18px;
+}
+
 .cert-group__vendor::after {
   content: '';
   flex: 1;
@@ -529,6 +544,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  text-decoration: none;
   padding: 1.05rem 1.3rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-sm);
@@ -556,6 +572,74 @@
 
 .cert__name { font-size: 1rem; font-weight: 500; }
 
+/* ── badge cards ────────────────────────────────────────────────────────── */
+/* `.cert` uses justify-content: space-between, which is right for a plain
+   text row (name left, code right) but pushes the text block to the far edge
+   once a badge is added — so badged rows pack from the start instead and let
+   the text fill the remaining width. That keeps every name on the same x. */
+.cert--badged {
+  gap: 1.1rem;
+  padding: 1rem 1.3rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.cert--badged .cert__text { flex: 1 1 auto; }
+
+/* rows with no badge keep the original left/right split */
+.cert:not(.cert--badged) .cert__text {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+/* Vendors design badges differently per credential level — AWS Foundational
+   is slate where Associate is blue; Microsoft Fundamentals has a white crown
+   where Associate has grey. That is real information and should not be
+   flattened away, so instead every badge sits in an identical tile. The
+   uniform frame makes the differing artwork read as deliberate. */
+.cert__badge {
+  width: 92px;
+  height: 92px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  padding: 7px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .045);
+  border: 1px solid var(--line);
+  /* held back a little so six bright badges do not shout on a dark page */
+  filter: saturate(.82) brightness(.95);
+  transition: filter .4s var(--ease), transform .4s var(--ease),
+              background .4s var(--ease), border-color .4s var(--ease);
+}
+
+.cert--badged:hover .cert__badge,
+.cert--badged:focus-visible .cert__badge {
+  filter: none;
+  transform: scale(1.04);
+  background: rgba(255, 255, 255, .08);
+  border-color: var(--line-strong);
+}
+
+.cert__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .55rem;
+  min-width: 0;
+}
+
+.cert--badged .cert__name { line-height: 1.3; }
+
+.cert__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  flex: 0 0 auto;
+}
+
 .cert__code {
   font-family: var(--font-mono);
   font-size: .76rem;
@@ -565,6 +649,36 @@
   border: 1px solid rgba(82, 213, 255, .28);
   border-radius: 6px;
   white-space: nowrap;
+}
+
+/* ── verifiable rows ────────────────────────────────────────────────────── */
+.cert--linked { cursor: pointer; }
+
+.cert__verify {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity .3s var(--ease), transform .3s var(--ease), color .3s var(--ease);
+}
+
+.cert--linked:hover .cert__verify,
+.cert--linked:focus-visible .cert__verify {
+  opacity: 1;
+  transform: none;
+  color: var(--mint);
+}
+
+/* on narrow screens the label would collide with the code, so keep it shown
+   and let the row wrap instead of animating it in on hover */
+@media (max-width: 560px), (hover: none) {
+  .cert { flex-wrap: wrap; }
+  .cert__verify { opacity: 1; transform: none; }
+  .cert__badge { width: 72px; height: 72px; }
 }
 
 /* ══════════════════════════════════════════════════════════════ timeline ═ */

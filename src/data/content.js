@@ -226,21 +226,62 @@ export const content = {
   certifications: {
     heading: 'Certifications',
     label: 'Validated',
+    // `image` is an optional badge picture for a certification. Give one and
+    // the row renders as a badge card; leave it out and the row stays a plain
+    // text line with just the vendor mark on the group heading.
+    // `icon` picks a vendor mark drawn inline in render.js — 'aws' or 'microsoft'.
+    // `url` is the public Credly (or Microsoft Learn) verification link for that
+    // certification. Leave it empty and the row simply renders as plain text;
+    // fill it in and the row becomes a link with a "Verify" affordance.
     groups: [
       {
         vendor: 'AWS',
+        icon: 'aws',
         items: [
-          { name: 'Solutions Architect — Associate', code: 'SAA-C03' },
-          { name: 'CloudOps Engineer — Associate', code: 'SOA-C03' },
-          { name: 'Cloud Practitioner', code: 'CLF-C02' },
+          {
+            name: 'Solutions Architect — Associate',
+            code: 'SAA-C03',
+            image: 'assets/aws-certified-solutions-architect-associate.webp',
+            url: 'https://www.credly.com/badges/86a5f079-cd91-46b1-94bc-dbdc02a9f8c6/public_url',
+          },
+          {
+            name: 'CloudOps Engineer — Associate',
+            code: 'SOA-C03',
+            image: 'assets/aws-certified-cloudops-engineer-associate.webp',
+            url: 'https://www.credly.com/badges/65e5ab82-813d-4bd1-b76d-3a54f2cdf1dd/public_url',
+          },
+          {
+            name: 'Cloud Practitioner',
+            code: 'CLF-C02',
+            image: 'assets/aws-certified-cloud-practitioner.webp',
+            url: 'https://www.credly.com/badges/c15a030c-ac38-415f-8d72-14a624d7d063/public_url',
+          },
         ],
       },
       {
         vendor: 'Microsoft Azure',
+        icon: 'microsoft',
         items: [
-          { name: 'Azure Administrator Associate', code: 'AZ-104' },
-          { name: 'Security Operations Analyst Associate', code: 'SC-200' },
-          { name: 'Azure Fundamentals', code: 'AZ-900' },
+          {
+            name: 'Azure Administrator Associate',
+            code: 'AZ-104',
+            image: 'assets/azure-administrator-associate.webp',
+            url: 'https://learn.microsoft.com/api/credentials/share/en-gb/AakifShaikh-4384/E5545849BC83CD38?sharingId=6E7A3677DBA554C6',
+          },
+          {
+            name: 'Security Operations Analyst Associate',
+            code: 'SC-200',
+            image: 'assets/azure-security-operations-analyst.webp',
+            url: 'https://learn.microsoft.com/api/credentials/share/en-gb/AakifShaikh-4384/C1174324F1EF8F76?sharingId=6E7A3677DBA554C6',
+          },
+          {
+            name: 'Azure Fundamentals',
+            code: 'AZ-900',
+            // Restyled badge. 'assets/azure-fundamentals.webp' is the official
+            // Microsoft-issued artwork — swap this line back to use it.
+            image: 'assets/azure-fundamentals-styled.webp',
+            url: 'https://learn.microsoft.com/api/credentials/share/en-gb/AakifShaikh-4384/2C3BF5B48C45E312?sharingId=6E7A3677DBA554C6',
+          },
         ],
       },
     ],

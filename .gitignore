@@ -16,3 +16,7 @@ desktop.ini
 
 # Claude Code local settings (launch.json is kept — it is useful to share)
 .claude/settings.local.json
+
+# Source images that are not served — the optimised .webp beside them is what
+# the site actually loads. Keeping these out keeps the repo small.
+assets/ChatGPT Image*.png
