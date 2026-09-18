@@ -14,7 +14,7 @@ export const content = {
     roles: ['Multi-Cloud Architecture', 'FinOps & Cost Strategy', 'DevSecOps', 'Cloud Governance'],
     location: 'Navi Mumbai, Maharashtra, India',
     tagline: 'I design cloud architectures that cost less and break less.',
-    // REPLACE with the email address you want shown publicly.
+    // Shown publicly in the contact grid.
     email: 'aakif_shaikh@outlook.com',
     resumeUrl: '', // e.g. 'assets/Aakif_Shaikh_Resume.pdf' — drop the PDF into /assets
     links: {

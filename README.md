@@ -39,15 +39,11 @@ technologies already appear as tags on every job and project card. The data
 is still in `content.js` under `skills`, with a comment explaining exactly
 what to restore if you want it back.
 
-### Two things to fill in before publishing
+### Still to do
 
-1. **`meta.email`** is currently `hello@example.com`. Replace it with the
-   address you actually want shown. It is deliberately not your work address —
-   putting an email on a public page invites scraping, so pick one you are
-   happy to publish.
-2. **`meta.resumeUrl`** is empty. Drop a PDF into `assets/` and set this to
-   e.g. `'assets/Aakif_Shaikh_Resume.pdf'` — a Résumé tile then appears in the
-   contact grid automatically.
+**`meta.resumeUrl`** is empty. Drop a PDF into `assets/` and set this to
+e.g. `'assets/Aakif_Shaikh_Resume.pdf'` — a Résumé tile then appears in the
+contact grid automatically.
 
 Your phone number is intentionally not on the site anywhere.
 
