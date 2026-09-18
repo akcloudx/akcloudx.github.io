@@ -1,131 +1,156 @@
-# Aakif Shaikh — Portfolio
+# akcloudx.github.io
 
-An interactive personal portfolio: a quiet typographic hero, scroll-driven
-reveals throughout, a draggable horizontal rail for the work, and a reactive
-2D canvas layer of drifting light behind the whole page.
+Personal portfolio of **Aakif Shaikh** — Cloud Solutions Architect working in
+multi-cloud architecture, FinOps and security design.
 
-Built with **no build step**. Plain ES modules, plain CSS, libraries vendored
-locally. There is no `npm install`, no bundler and no Node requirement.
+**→ [akcloudx.github.io](https://akcloudx.github.io)**
+
+[![Pages](https://img.shields.io/badge/GitHub%20Pages-live-45e7b0?style=flat-square)](https://akcloudx.github.io)
+![No build step](https://img.shields.io/badge/build%20step-none-52d5ff?style=flat-square)
+![Dependencies](https://img.shields.io/badge/npm%20dependencies-0-8b6cff?style=flat-square)
 
 ---
 
-## Running it
+## About this build
 
-The site uses ES modules, which browsers refuse to load over `file://`. It has
-to be served over HTTP. A one-file Python server is included:
+A static site with **no build step at all**. No `npm install`, no bundler, no
+Node requirement — just ES modules, plain CSS and three animation libraries
+vendored into the repository. Clone it and open it over any HTTP server and it
+runs.
+
+That constraint was deliberate. A portfolio should still build and deploy
+years from now without a toolchain to resurrect first.
+
+## Features
+
+- **Typographic hero** with a per-character intro and a rotating role line
+- **Smooth scrolling** (Lenis) driving masked heading reveals, animated metric
+  counters, a filling timeline spine and a velocity-reactive marquee
+- **Horizontally scrollable work rail** — drag, swipe, arrow buttons, arrow
+  keys or trackpad, with scroll-snap. No scroll hijacking
+- **Verifiable certifications** — each badge links to its issuer's public
+  verification page (Credly for AWS, Microsoft Learn for Azure)
+- **Reactive canvas layer** of drifting light, a custom cursor and magnetic
+  buttons
+- **Content-driven** — every word on the page comes from a single data file
+- Full `prefers-reduced-motion` support, responsive down to ~320px
+
+## Built with
+
+| | |
+|---|---|
+| **Markup / styles** | Hand-written HTML, CSS custom properties, no framework |
+| **Animation** | [GSAP](https://gsap.com) + ScrollTrigger |
+| **Smooth scroll** | [Lenis](https://github.com/darkroomengineering/lenis) |
+| **Type** | Space Grotesk, Inter, JetBrains Mono (Google Fonts) |
+| **Hosting** | GitHub Pages |
+
+Libraries are pinned and committed under `vendor/` rather than fetched from a
+CDN, so the site has no third-party runtime dependency except the webfont —
+which falls back to a system stack if it fails to load.
+
+---
+
+## Running locally
+
+ES modules will not load over `file://`, so the site needs to be served over
+HTTP. A dependency-free Python server is included:
 
 ```bash
 python serve.py
 ```
 
 Then open <http://localhost:5173>. Pass a port to use a different one
-(`python serve.py 8080`). On Windows you can also double-click `start.bat`.
+(`python serve.py 8080`). On Windows, `start.bat` starts the server and opens
+a browser in one step.
 
----
+Any static server works just as well — `npx serve`, `php -S`, whatever is to
+hand.
 
-## Editing the content
-
-**Everything the site says lives in one file: [`src/data/content.js`](src/data/content.js).**
-
-Change the text there and reload — no other file needs touching. It covers your
-name and title, the rotating hero roles, the about copy, the animated metric
-counters, every job, every project card, certifications,
-education, languages, the contact block, the marquee keywords and the nav.
-
-### A note on the removed Capabilities section
-
-The standalone skills/Capabilities section was removed — the same
-technologies already appear as tags on every job and project card. The data
-is still in `content.js` under `skills`, with a comment explaining exactly
-what to restore if you want it back.
-
-### Still to do
-
-**`meta.resumeUrl`** is empty. Drop a PDF into `assets/` and set this to
-e.g. `'assets/Aakif_Shaikh_Resume.pdf'` — a Résumé tile then appears in the
-contact grid automatically.
-
-Your phone number is intentionally not on the site anywhere.
-
----
-
-## Project layout
+## Project structure
 
 ```
-index.html              markup shell — section scaffolding only, no copy
-serve.py                zero-dependency static server
-start.bat               Windows convenience launcher
+index.html              section scaffolding — no copy lives here
+serve.py                dependency-free static server for local development
+start.bat               Windows launcher
 
-src/data/content.js     ← ALL site content lives here
+src/data/content.js     ← every word on the site
 src/css/
   base.css              design tokens, reset, cursor, preloader, grain
   layout.css            shell, header, menu, ticker, buttons, footer
-  sections.css          hero, metrics, work rail, certs, timeline, contact
+  sections.css          hero, metrics, work rail, certifications, timeline
 src/js/
   main.js               boot sequence
   render.js             builds the DOM from content.js
-  canvasFx.js           2D background: light fields, pointer trail, dot grid
-  scroll.js             Lenis smooth scroll + every ScrollTrigger animation
-  ui.js                 preloader, custom cursor, magnetic buttons, menu, clock
+  scroll.js             Lenis + every scroll-driven animation
+  ui.js                 preloader, cursor, magnetic buttons, menu, clock
+  canvasFx.js           background canvas: light fields, pointer trail, grid
 
-vendor/                 GSAP, ScrollTrigger, Lenis (pinned copies)
-assets/                 drop your résumé PDF / images here
+vendor/                 GSAP, ScrollTrigger, Lenis (pinned)
+assets/                 certification badges
 ```
 
----
+## Editing the content
 
-## The removed 3D hero
+All copy lives in [`src/data/content.js`](src/data/content.js) — name and
+title, hero roles, about text, metric counters, every role and project,
+certifications, education, contact details and navigation. Nothing else needs
+touching to change what the site says.
 
-The site originally opened with a WebGL particle field that morphed between a
-sphere, a torus knot and a cube lattice. It was removed because it was tiring
-to look at — a large additive particle field on a dark page glares, and no
-amount of desaturation fully fixed it.
+Two fields progressively enable extra UI rather than requiring it:
 
-The hero is now purely typographic. The only motion behind it is the soft
-drifting light in `canvasFx.js`, which is deliberately low contrast.
+| Field | Effect when set |
+|---|---|
+| `certifications[].items[].image` | Row renders as a badge card instead of a text line |
+| `certifications[].items[].url` | Row becomes a link with a "Verify" affordance |
+| `meta.resumeUrl` | A Résumé tile appears in the contact grid |
 
-The code for it (`src/js/hero3d.js` and `vendor/three.module.js`) was deleted
-in a later commit. If you ever want it back, it is recoverable from this
-repository's history.
+Leave any of them empty and that feature simply does not render — the site
+never points at a missing file or a dead link.
 
----
+## Design notes
 
-## Design tokens
-
-Colours, fonts and spacing are CSS custom properties at the top of
+Colours, type and spacing are CSS custom properties at the top of
 `src/css/base.css`. Changing `--cyan` / `--violet` / `--mint` / `--amber`
-re-themes the whole site, including the project card accents. `--text-dim`
-and `--text-faint` carry all the supporting copy and are tuned for contrast on
-the near-black ground — check contrast before darkening either.
+re-themes the site including the project card accents.
 
----
+`--text-dim` and `--text-faint` carry all supporting copy and are tuned for
+contrast against the near-black background — worth re-checking contrast before
+darkening either.
 
-## Accessibility and fallbacks
+Certification badges sit in identical tiles. Vendors style badges by
+credential level (AWS Foundational is slate where Associate is blue; Microsoft
+Fundamentals has a white crown where Associate has grey), and a uniform frame
+lets that difference read as information rather than inconsistency.
 
-- `prefers-reduced-motion: reduce` disables the 2D canvas and turns off smooth
-  scrolling and the reveal animations. All content still appears, immediately.
-- The Selected Work rail is a real horizontal scroller, not a scroll-jack:
-  drag it, swipe it, use the arrows, press the left/right arrow keys once it
-  has focus, or use a trackpad. Nothing hijacks your vertical scrolling.
-- The custom cursor is suppressed on touch and coarse-pointer devices.
-- The page is fully responsive down to ~320px, with a safe-area-aware header
-  and footer.
+## Accessibility
 
----
+- `prefers-reduced-motion: reduce` disables the background canvas and turns
+  off smooth scrolling and reveal animations. All content appears immediately
+- The work rail is a real scroller, operable by drag, swipe, buttons, arrow
+  keys and trackpad — vertical scrolling is never hijacked
+- The custom cursor is suppressed on touch and coarse-pointer devices
+- Badge links carry descriptive `aria-label`s, and the "Verify" hint is shown
+  permanently where hover is unavailable
+- Layout is safe-area aware and responsive to ~320px
 
 ## Deploying
 
-It is a static site — no build output to generate.
+A static site with no build output to generate — deploying is uploading the
+folder.
 
-- **Netlify:** drag the whole folder onto the Netlify drop page.
-- **Vercel:** `vercel --prod` from this directory, or import the repo and set
-  the framework preset to "Other" with no build command.
-- **GitHub Pages:** this repository is named `akcloudx.github.io`, so GitHub
-  serves it automatically at <https://akcloudx.github.io> from the root of the
-  `main` branch. Enable it once under Settings → Pages → Source → "Deploy from
-  a branch" → `main` / `/ (root)`.
-- **Any static host:** upload the folder as-is.
+This repository is named `akcloudx.github.io`, so GitHub Pages serves it from
+the root of `main` automatically. It works unchanged on Netlify, Vercel,
+Cloudflare Pages or any static host.
 
-Only the Google Fonts stylesheet is fetched at runtime; everything else is
-local, so the site works offline apart from the webfont (which falls back to a
-system stack).
+---
+
+## Credits
+
+Certification badges are the property of Amazon Web Services and Microsoft,
+shown here for credentials held by the site's author and linked to their
+official verification pages.
+
+GSAP is used under the [GSAP standard license](https://gsap.com/licensing/).
+Lenis is MIT. The AWS vendor glyph comes from
+[Simple Icons](https://simpleicons.org) (CC0).
