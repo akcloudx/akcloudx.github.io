@@ -1,0 +1,18 @@
+# OS / filesystem noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+
+# Google Drive streaming artifacts
+*.tmp
+.tmp.drivedownload/
+.tmp.driveupload/
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local settings (launch.json is kept — it is useful to share)
+.claude/settings.local.json

@@ -1,0 +1,318 @@
+/* ============================================================================
+   BASE — design tokens, reset, typography, cursor, preloader, global chrome
+   ========================================================================== */
+
+:root {
+  /* ── palette ───────────────────────────────────────────────────────────── */
+  --bg:            #05070d;
+  --bg-soft:       #0a0e18;
+  --bg-raised:     #10141f;
+  --line:          rgba(255, 255, 255, .08);
+  --line-strong:   rgba(255, 255, 255, .16);
+
+  /* Supporting text sits on a near-black ground, so it needs to be lifted
+     well clear of the background. --text-dim carries body copy (~9.5:1 on
+     --bg) and --text-faint the small mono labels (~6.2:1) — neither should
+     be darkened without re-checking contrast. */
+  --text:          #eef1f7;
+  --text-dim:      #c2cad9;
+  --text-faint:    #8e98ad;
+
+  --cyan:          #52d5ff;
+  --violet:        #8b6cff;
+  --mint:          #45e7b0;
+  --amber:         #ffb454;
+
+  --accent:        var(--cyan);
+  --accent-2:      var(--violet);
+
+  /* ── type ──────────────────────────────────────────────────────────────── */
+  --font-display: 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body:    'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Cascadia Code', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* ── rhythm ────────────────────────────────────────────────────────────── */
+  --gutter:      clamp(1.25rem, 5vw, 5rem);
+  --shell:       1240px;
+  --section-pad: clamp(6rem, 14vh, 11rem);
+  --radius:      18px;
+  --radius-sm:   10px;
+
+  /* ── motion ────────────────────────────────────────────────────────────── */
+  --ease:      cubic-bezier(.22, 1, .36, 1);
+  --ease-soft: cubic-bezier(.4, 0, .2, 1);
+
+  color-scheme: dark;
+}
+
+/* ── reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto; /* Lenis handles smoothing */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.68;
+  letter-spacing: -0.005em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.is-locked { overflow: hidden; height: 100vh; }
+
+img, svg, canvas { max-width: 100%; display: block; }
+[hidden] { display: none !important; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+::selection { background: var(--cyan); color: #04060c; }
+
+/* ── scrollbar ──────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 9px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, .13);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, .24); }
+
+/* ── focus ──────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ══════════════════════════════════════════════════════ background fx ════ */
+.fx-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .85;
+}
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 8s steps(6) infinite;
+}
+
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  16%  { transform: translate(-3%, -2%); }
+  33%  { transform: translate(2%, -4%); }
+  50%  { transform: translate(-1%, 3%); }
+  66%  { transform: translate(3%, 1%); }
+  83%  { transform: translate(-2%, 2%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ══════════════════════════════════════════════════════════ preloader ════ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  transition: opacity .7s var(--ease), visibility .7s;
+}
+
+.preloader.is-done {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.preloader__inner {
+  width: min(460px, calc(100vw - 3rem));
+  display: grid;
+  gap: 1.1rem;
+}
+
+.preloader__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  min-height: 1.2em;
+}
+
+.preloader__name .ch {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(.5em);
+  animation: preChar .55s var(--ease) forwards;
+}
+.preloader__name .ch--space { width: .32em; }
+
+@keyframes preChar {
+  to { opacity: 1; transform: none; }
+}
+
+.preloader__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.preloader__count { color: var(--cyan); font-size: .95rem; }
+
+.preloader__bar {
+  height: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.preloader__bar i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--violet), var(--cyan));
+}
+
+/* ══════════════════════════════════════════════════════ custom cursor ════ */
+.cursor {
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 190;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+
+.cursor__dot,
+.cursor__ring {
+  position: absolute;
+  top: 0; left: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cursor__dot {
+  width: 6px;
+  height: 6px;
+  background: #fff;
+}
+
+.cursor__ring {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, .55);
+  display: grid;
+  place-items: center;
+  transition: width .32s var(--ease), height .32s var(--ease),
+              background .32s var(--ease), border-color .32s var(--ease);
+}
+
+.cursor__label {
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #04060c;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity .2s var(--ease);
+}
+
+.cursor.is-active .cursor__ring {
+  width: 84px;
+  height: 84px;
+  background: #fff;
+  border-color: #fff;
+}
+.cursor.is-active .cursor__dot { opacity: 0; }
+.cursor.is-active .cursor__label { opacity: 1; }
+
+/* Hide the custom cursor where a real pointer is unavailable */
+@media (hover: none), (pointer: coarse) {
+  .cursor { display: none; }
+}
+
+/* ══════════════════════════════════════════════════ scroll progress ══════ */
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  z-index: 120;
+  background: transparent;
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--violet), var(--cyan), var(--mint));
+  box-shadow: 0 0 14px rgba(82, 213, 255, .55);
+}
+
+/* ══════════════════════════════════════════════ reveal primitives ════════ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  will-change: opacity, transform;
+}
+
+.word { display: inline-block; overflow: hidden; vertical-align: top; }
+.word__in {
+  display: inline-block;
+  transform: translateY(105%);
+  will-change: transform;
+}
+.word--space { width: .3em; }
+
+/* ══════════════════════════════════════════════════ reduced motion ═══════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .grain { animation: none; }
+  [data-reveal] { opacity: 1; transform: none; }
+  .word__in { transform: none; }
+  .fx-canvas { display: none; }
+}
