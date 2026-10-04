@@ -211,6 +211,7 @@ function renderExperience() {
         <span>· ${esc(r.place)}</span>
         ${r.current ? '<span class="job__badge">Current</span>' : ''}
       </div>
+      ${r.note ? `<p class="job__note">${esc(r.note)}</p>` : ''}
       <ul class="job__points">
         ${r.points.map((p) => `<li>${esc(p)}</li>`).join('')}
       </ul>

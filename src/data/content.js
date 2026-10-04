@@ -27,10 +27,10 @@ export const content = {
   about: {
     heading: 'About',
     label: 'Who I am',
-    lead: 'Cloud consultant and architect specialising in multi-cloud cost optimisation and security design.',
+    lead: 'Cloud and platform engineer with 6.5+ years in IT infrastructure, specialising in multi-cloud architecture, FinOps and DevOps automation.',
     body: [
-      'I hold an MSc in Cloud Architecture and Security alongside AWS and Azure certifications, and I spend my days designing cost-optimised, secure architectures for enterprise-scale infrastructure.',
-      'That work has delivered $50K+ per month in recurring savings and a 75% reduction in vulnerability exposure across 300–500+ hybrid servers, spanning enterprise and government accounts across international markets.',
+      'I design cost-optimised, zero-trust architectures for enterprise and government clients, managing 300–500+ hybrid servers across international markets. My background is an MSc in Cloud Architecture and Security alongside AWS and Azure certifications.',
+      'That work has delivered $50K+ per month in recurring savings and a 75% reduction in vulnerability exposure.',
     ],
   },
 
@@ -50,41 +50,25 @@ export const content = {
     roles: [
       {
         company: 'Brennan',
-        role: 'Associate Cloud Consultant — Managed Services',
-        period: 'Nov 2025 — Present',
+        role: 'Cloud Consultant',
+        period: 'Sept 2023 — Present',
         place: 'Navi Mumbai, India (Hybrid)',
+        note: 'Promoted through Senior IT Analyst and System Administrator roles since joining',
         current: true,
         points: [
-          'Designed and implemented a multi-year Azure cost architecture combining 3-Year Savings Plans and Reserved Capacity for MySQL Flexible Servers (29%), Reserved Instances for Azure SQL (47%), and v5-generation SKU right-sizing backed by 30-day performance data (53%) — delivering $50K+ USD in recurring monthly savings across 3 enterprise client portfolios.',
-          'Act as trusted cloud advisor and technical architect for 6–10 enterprise and government accounts, overseeing architecture and operations for 300–500+ hybrid Windows/Linux servers across international markets.',
-          'Led Microsoft Azure Expert MSP Audit engagements, presenting technical evidence, security architecture and compliance documentation to Microsoft auditors, maintaining Azure Expert MSP certification status.',
-          'Governed client cloud maturity using the Microsoft Cloud Adoption Framework and Well-Architected Framework, producing WAF-aligned governance reports per account.',
-          'Engineered an Azure Monitor/KQL observability architecture with proactive Service Health alerting, sustaining 99.9% availability.',
-          'Standardised SOPs in Confluence and mentored 4 junior engineers as the go-to technical and process resource for cross-team peers.',
-        ],
-        tags: ['Azure', 'FinOps', 'CAF / WAF', 'KQL', 'Architecture'],
-      },
-      {
-        company: 'Brennan',
-        role: 'Associate System Administrator — Managed Services',
-        period: 'Sept 2024 — Nov 2025',
-        place: 'Navi Mumbai, India (Hybrid)',
-        points: [
-          'Reduced vulnerability exposure by 75% by designing a zero-trust access architecture using custom RBAC and Privileged Identity Management, closing findings identified via Nessus and SOC monitoring.',
-          'Standardised SOPs in Confluence, cutting Service Desk escalations by 30% across supported accounts, including firmware and patch management across VMware ESXi and Hyper-V.',
+          'Delivered $50K+/month in recurring cost savings across 3 enterprise client portfolios by redesigning Azure spend through multi-year Savings Plans, Reserved Capacity and data-driven SKU right-sizing — up to 53% savings on individual workloads.',
+          'Serve as lead technical advisor for 6–10 enterprise and government client accounts, overseeing cloud architecture and operations across 300–500+ servers internationally.',
+          'Led the company’s Microsoft Azure Expert MSP audit process, presenting security and compliance evidence directly to Microsoft auditors and helping maintain our elite MSP certification.',
+          'Improved client cloud governance and maturity using Microsoft’s CAF/WAF best-practice frameworks, delivering a governance report for each account.',
+          'Built a proactive monitoring and alerting system (Azure Monitor/KQL) that kept clients ahead of security issues and maintenance windows, sustaining 99.9% uptime.',
+          'Reduced vulnerability exposure by 75% through infrastructure and VM vulnerability remediation, closing findings identified in Nessus and other security tools.',
+          'Applied zero-trust principles by migrating Azure Key Vaults from access policies to RBAC permission models, and advising clients to use Privileged Identity Management with least-privilege RBAC instead of permanent role assignments.',
+          'Standardised SOPs in Atlassian Confluence, cutting Service Desk escalations by 30% across supported accounts, including firmware and patch management across VMware ESXi and Hyper-V.',
           'Resolved 1,500+ P1–P4 L3 requests and 200+ high-risk Change Requests annually within SLA under ITIL v4 practices.',
-        ],
-        tags: ['Zero Trust', 'PIM', 'RBAC', 'Nessus', 'ITIL v4'],
-      },
-      {
-        company: 'Brennan',
-        role: 'Senior IT Analyst — Managed Services',
-        period: 'Sept 2023 — Sept 2024',
-        place: 'Navi Mumbai, India',
-        points: [
           'Administered enterprise messaging and virtualisation environments including Office 365, Exchange Online, Microsoft Intune, Mimecast, VMware ESXi and Hyper-V.',
+          'Mentored 4 junior engineers and standardised team documentation, becoming the go-to technical resource across teams.',
         ],
-        tags: ['Microsoft 365', 'Exchange', 'Intune', 'ESXi'],
+        tags: ['Azure', 'FinOps', 'CAF / WAF', 'Zero Trust', 'KQL', 'ITIL v4'],
       },
       {
         company: 'D2K Technologies',
@@ -92,11 +76,11 @@ export const content = {
         period: 'July 2022 — Aug 2023',
         place: 'Navi Mumbai, India (On-site)',
         points: [
-          'Architected and managed 50+ Windows/Linux servers for a FinTech software company serving Tier-1 banking clients, supporting secure, highly available production infrastructure.',
-          'Provisioned UAT and production environments for Bank of India, Union Bank and National Housing Bank, scaling Hyper-V virtualisation to host SQL Server, Oracle DB, IIS and SSRS/SSIS on a strict client timeline.',
-          'Secured infrastructure and DR posture for 200+ users through Active Directory GPO enforcement, Zabbix monitoring and automated backup/DR protocols.',
+          'Architected and managed 50+ Windows/Linux servers for a FinTech software development company serving Tier-1 banking clients, supporting secure, highly available production infrastructure.',
+          'Provisioned and deployed UAT and production environments for Bank of India, Union Bank and National Housing Bank, scaling Hyper-V virtualisation to host SQL Server, Oracle DB, IIS and SSRS/SSIS on a strict client timeline.',
+          'Secured infrastructure and disaster recovery posture for 200+ users through Active Directory GPO enforcement, Zabbix monitoring and automated backup/DR protocols.',
         ],
-        tags: ['Hyper-V', 'SQL Server', 'Active Directory', 'DR'],
+        tags: ['Hyper-V', 'SQL Server', 'Active Directory', 'Zabbix', 'DR'],
       },
       {
         company: 'SM2 Infotech',
@@ -104,8 +88,7 @@ export const content = {
         period: 'Jan 2020 — Feb 2022',
         place: 'Navi Mumbai, India (On-site)',
         points: [
-          'Delivered Tier 1/2 on-site and remote support under Annual Maintenance Contracts, resolving issues across Microsoft Office, Outlook and network device environments within SLA.',
-          'Migrated mailbox and OneDrive data from Microsoft 365 to Google Workspace for Billabong High International School with zero data loss, then served as primary post-migration support contact.',
+          'Migrated mailbox and OneDrive data from Microsoft 365 to Google Workspace for Billabong High International School with zero data loss, and served as the primary post-migration support contact.',
         ],
         tags: ['Microsoft 365', 'Google Workspace', 'Migration'],
       },
@@ -122,13 +105,13 @@ export const content = {
         title: 'Multi-Cloud FinOps Optimization System',
         kind: 'MSc Capstone Project',
         year: '2026',
-        summary: 'A live platform that unifies Azure and AWS cost and inventory data, then turns it into dollar-quantified savings recommendations.',
+        summary: 'A live, multi-tenant platform that unifies Azure and AWS cost and inventory data, then turns it into dollar-quantified savings recommendations.',
         points: [
-          'Unified Azure and AWS cost/inventory into one live platform using 9 KQL query groups, 14+ AWS resource types and hourly automated sync.',
+          'Unified Azure and AWS cost/inventory into one live, multi-tenant platform (Python, Streamlit, Azure SQL, Azure Functions) using 9 KQL query groups, 14+ AWS resource types and hourly automated sync.',
           'Built Reservation/Savings Plan coverage matching and a VM/EC2 rightsizing engine producing dollar-quantified recommendations and FinOps maturity scoring.',
           'Achieved zero standing credentials using Managed Identity and read-only IAM, validated against provider policy simulators.',
         ],
-        tags: ['Azure', 'AWS', 'KQL', 'Python', 'FinOps'],
+        tags: ['Python', 'Streamlit', 'Azure SQL', 'Azure Functions', 'KQL', 'FinOps'],
         link: 'https://github.com/akcloudx',
         linkLabel: 'View repository',
         accent: 'cyan',
@@ -156,7 +139,7 @@ export const content = {
         year: '2025',
         summary: 'A least-privilege identity model that cut vulnerability exposure by three quarters across a 500-server hybrid estate.',
         points: [
-          'Custom RBAC roles and Privileged Identity Management replacing standing administrative access.',
+          'Migrated Azure Key Vaults from access policies to RBAC permission models, and replaced standing administrative access with Privileged Identity Management.',
           'Closed findings surfaced by Nessus scanning and SOC monitoring, reducing exposure by 75%.',
           'Rolled out across enterprise and government accounts without disrupting operational SLAs.',
         ],
@@ -208,7 +191,7 @@ export const content = {
         items: ['Microsoft Defender for Cloud', 'Privileged Identity Management', 'Zero-Trust RBAC', 'Nessus', 'CrowdStrike'],
       },
       {
-        title: 'DevOps & Automation',
+        title: 'DevOps, CI/CD & Automation',
         items: ['Terraform', 'Ansible', 'Kubernetes (AKS / EKS)', 'Docker', 'Azure DevOps', 'GitHub Actions', 'Argo CD', 'Jenkins', 'Python / Bash / PowerShell'],
       },
       {
@@ -217,7 +200,7 @@ export const content = {
       },
       {
         title: 'IT Service Management',
-        items: ['ITIL v4', 'Incident Management', 'Problem Management', 'Change Management', 'Request Management'],
+        items: ['ITIL v4', 'Incident Management', 'Problem Management', 'Change Management', 'Request Management', 'ServiceNow'],
       },
     ],
   },
@@ -301,7 +284,7 @@ export const content = {
       },
       {
         degree: 'BSc in Information Technology',
-        school: 'Yashwantrao Chavan College of Science, Commerce & IT',
+        school: 'Yashwantrao Chavan College of Arts, Commerce and Science',
         place: 'Navi Mumbai, India',
         period: '2019 — 2022',
         note: 'CGPI 9.15 / 10',
